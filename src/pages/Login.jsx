@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -11,9 +13,11 @@ import {
   Input,
 } from "@chakra-ui/react";
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Please enter your email"),
   password: Yup.string()
-    .required("Password is required")
+    .required("Please enter your password")
     .matches(
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       ` - Password must contain at least one uppercase letter.
@@ -49,13 +53,14 @@ const SignUp = () => {
         color: "var(--blackish)",
       }}
     >
-      <Box className="flex flex-col justify-start w-full md:w-1/2 ">
-        <Box className="flex justify-center md:block px-[5rem]">
-          <Image
-            objectFit="contain"
-            src="src\assets\logo\png\logo-black.png"
-            boxSize="250px"
-          ></Image>
+      <Box className="flex flex-col w-full md:w-1/2 ">
+        <Box className="flex justify-center md:block w-[400px] px-[5rem] my-[6rem]">
+          <Link to="/">
+            <Image
+              objectFit="cover"
+              src="src\assets\logo\png\logo-black.png"
+            ></Image>
+          </Link>
         </Box>
         <VStack>
           <Heading
@@ -111,11 +116,11 @@ const SignUp = () => {
               </VStack>
             </form>
           </Box>
-          <Box className="mt-5">
-            Don't have an account?
-            {/* <li>
-              <Link to="#">Log in</Link>
-            </li> */}
+          <Box className="mt-5 text-center">
+            Don't have an account?{" "}
+            <Link to="/signup" className="text-[var(--dark-cyan)] underline">
+              Sign up
+            </Link>
           </Box>
           <VStack className="mt-5">
             {currentErrors.length > 0 && (

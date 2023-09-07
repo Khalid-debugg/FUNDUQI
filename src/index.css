@@ -5,12 +5,12 @@
 @tailwind components;
 @tailwind utilities;
 :root{
-    --cyan: #00b8a9;
-    --light-cyan: #00ebd8;
-    --dark-cyan: #00857a;
-    --lemon: #b1f93c;
-    --light-lemon: #c5fb6d;
-    --blackish: #111111;
+    --cyan: rgb(0, 184, 169);
+    --light-cyan: rgb(0, 235, 215);
+    --dark-cyan: rgb(0, 133, 122);
+    --lemon: rgb(177, 249, 60);
+    --light-lemon: rgb(197, 251, 109);
+    --blackish: rgb(17, 17, 17);
 }
 
 *, *::after,*::before{
@@ -19,8 +19,8 @@
     box-sizing: border-box;
 }
 body{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Montserrat', sans-serif;
+h1, h2, h3, h4, h5, h6, nav *{
+    font-family: 'Montserrat', sans-serif !important;
 }

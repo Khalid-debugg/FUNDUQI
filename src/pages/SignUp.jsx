@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import {
   Box,
@@ -9,6 +10,7 @@ import {
   FormControl,
   Heading,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
@@ -31,6 +33,7 @@ const SignupSchema = Yup.object().shape({
 });
 
 const SignUp = () => {
+  const toast = useToast();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -42,7 +45,13 @@ const SignUp = () => {
     validationSchema: SignupSchema,
     onSubmit: (values, actions) => {
       actions.resetForm();
-      alert(JSON.stringify(values, null, 2));
+      toast({
+        title: "Congrats!!!!",
+        description: "We've created your account successfully.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     },
   });
   const currentErrors = Object.keys(formik.errors).filter((key) => {
@@ -57,13 +66,14 @@ const SignUp = () => {
         color: "var(--blackish)",
       }}
     >
-      <Box className="flex flex-col justify-start w-full md:w-1/2 ">
-        <Box className="flex justify-center md:block px-[5rem]">
-          <Image
-            objectFit="contain"
-            src="src\assets\logo\png\logo-black.png"
-            boxSize="250px"
-          ></Image>
+      <Box className="flex flex-col w-full md:w-1/2 ">
+        <Box className="flex justify-center md:block w-[400px] px-[5rem] my-[6rem]">
+          <Link to="/">
+            <Image
+              objectFit="cover"
+              src="src\assets\logo\png\logo-black.png"
+            ></Image>
+          </Link>
         </Box>
         <VStack>
           <Heading
@@ -121,7 +131,7 @@ const SignUp = () => {
                     name="email"
                     type="email"
                     placeholder="Your email"
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline 10"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     {...formik.getFieldProps("email")}
                   />
                 </FormControl>
@@ -165,11 +175,11 @@ const SignUp = () => {
               </VStack>
             </form>
           </Box>
-          <Box className="mt-5">
-            Do you have an Account?
-            {/* <li>
-              <Link to="#">Log in</Link>
-            </li> */}
+          <Box className="mt-5 text-center">
+            Do you have an Account?{" "}
+            <Link to="/login" className="text-[var(--dark-cyan)] underline">
+              Log in
+            </Link>
           </Box>
           <VStack className="mt-5">
             {currentErrors.length > 0 && (
