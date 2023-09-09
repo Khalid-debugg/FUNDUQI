@@ -54,11 +54,12 @@ const SignUp = () => {
       }}
     >
       <Box className="flex flex-col w-full md:w-1/2 ">
-        <Box className="flex justify-center md:block w-[400px] px-[5rem] my-[6rem]">
+        <Box className="flex justify-center md:block px-[5rem] my-[6rem]">
           <Link to="/">
             <Image
               objectFit="cover"
               src="src\assets\logo\png\logo-black.png"
+              w="250px"
             ></Image>
           </Link>
         </Box>

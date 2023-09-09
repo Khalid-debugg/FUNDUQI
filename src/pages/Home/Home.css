@@ -1,3 +1,22 @@
+:root{
+    --gradient: linear-gradient(to right, #fff0f9, #f5e6f4, #e9ddf0, #dbd4ed, #cacce9, #cacce9, #cacce9, #cacce9, #dbd4ed, #e9ddf0, #f5e6f4, #fff0f9);
+}
+.bg-blur{
+    background-image: var(--gradient)
+}
+
 .bg{
-    background-color: rgba(0, 133, 122, 0.6);
+    background-color: rgba(0, 184, 169, 0.5);
+}
+.headline-transform{
+    transform: translateX(15rem);
+}
+.search-transform{
+    transform: translateY(-4rem);
+}
+.box-shadow{
+    box-shadow: 0px 4px 10px 0px rgba(94,94,94,1);
+}
+.menu-transform{
+    transform: translateX(50rem);
 }
