@@ -6,12 +6,12 @@ import {
   Box,
   Image,
   VStack,
-  HStack,
   Button,
   FormControl,
   Heading,
   Input,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
@@ -45,9 +45,14 @@ const SignUp = () => {
     return formik.errors[key] && formik.touched[key];
   });
 
+  useEffect(() => {
+    document.documentElement.style.colorScheme = "light";
+  }, []);
   return (
     <Box
+      colorScheme="light"
       className="w-full h-screen flex"
+      backgroundColor="white"
       color="white"
       css={{
         color: "var(--blackish)",
@@ -85,6 +90,7 @@ const SignUp = () => {
                   isInvalid={formik.errors.email && formik.touched.email}
                 >
                   <Input
+                    bg="white"
                     id="email"
                     name="email"
                     type="email"

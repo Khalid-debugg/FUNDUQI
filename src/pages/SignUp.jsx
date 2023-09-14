@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { useEffect } from "react";
 import {
   Box,
   Image,
@@ -12,6 +13,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
+
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
@@ -57,11 +59,15 @@ const SignUp = () => {
   const currentErrors = Object.keys(formik.errors).filter((key) => {
     return formik.errors[key] && formik.touched[key];
   });
+  useEffect(() => {
+    document.documentElement.style.colorScheme = "light";
+  }, []);
 
   return (
     <Box
       className="w-full h-screen flex"
       color="white"
+      backgroundColor="white"
       css={{
         color: "var(--blackish)",
       }}

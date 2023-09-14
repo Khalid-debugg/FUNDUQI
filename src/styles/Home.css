@@ -1,0 +1,27 @@
+:root{
+    --light-gradient: linear-gradient(to right top, #cfd6ff, #c4e2ff, #c1ebff, #c9f3f9, #d7f9f4, #d7f9f4, #d7f9f4, #d7f9f4, #c9f3f9, #c1ebff, #c4e2ff, #cfd6ff);
+    --nav-gradient: linear-gradient(to left, #d3d9f9, #cae6fd, #cdf1f9, #dbf9f4, #eefff3);
+    --dark-gradient: linear-gradient(to right top, #051937, #003352, #004e68, #006975, #00857a);
+    --dark-nav-gradient: linear-gradient(to right, #051937, #003352, #004e68, #006975, #00857a);
+}
+.bg-blur{
+    background-image: var(--nav-gradient);
+}
+.bg-dark-blur{
+    background-image: var(--dark-nav-gradient);
+}
+.bg{
+    background-color: rgba(0, 133, 122, 0.75);
+}
+.headline-transform{
+    transform: translateX(20vw);
+}
+.search-transform{
+    transform: translateY(-4rem);
+}
+.box-shadow{
+    box-shadow: 0px 4px 10px 0px rgba(94, 94, 94, 0.459);
+}
+.menu-transform{
+    transform: translateX(50rem);
+}
