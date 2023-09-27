@@ -13,15 +13,9 @@
 .bg{
     background-color: rgba(0, 133, 122, 0.75);
 }
-.headline-transform{
-    transform: translateX(20vw);
-}
-.search-transform{
-    transform: translateY(-4rem);
+.menu-transform{
+    transform: translateX(50rem);
 }
 .box-shadow{
     box-shadow: 0px 4px 10px 0px rgba(94, 94, 94, 0.459);
-}
-.menu-transform{
-    transform: translateX(50rem);
 }

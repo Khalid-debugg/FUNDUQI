@@ -1,5 +1,10 @@
-import React from "react";
-import Slider from "react-slick";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowAltCircleLeft,
+  faArrowAltCircleRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { motion, useMotionValue, useDragControls } from "framer-motion";
 import {
   Card,
   CardBody,
@@ -11,116 +16,116 @@ import {
   CardFooter,
   Box,
   Image,
+  Flex,
   ButtonGroup,
 } from "@chakra-ui/react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-const slides = [
-  {
-    title: "Slide 1",
-    image: "slide1.jpg",
-    offer: 40,
-  },
-  {
-    title: "Slide 2",
-    image: "slide2.jpg",
-    offer: 44,
-  },
-  {
-    title: "Slide 3",
-    image: "slide3.jpg",
-    offer: 60,
-  },
-  {
-    title: "Slide 4",
-    image: "slide1.jpg",
-    offer: 40,
-  },
-  {
-    title: "Slide 5",
-    image: "slide2.jpg",
-    offer: 35,
-  },
-  {
-    title: "Slide 6",
-    image: "slide3.jpg",
-    offer: 25,
-  },
-  // Add more slides as needed
-];
+import useTheme from "../customHooks/useTheme";
 
-const Carousel = () => {
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 900,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+const Carousel = ({ slides }) => {
+  const theme = useTheme();
+  const carouselWidth = slides.length * 500;
+  const [isDragging, setIsDragging] = useState(false);
+  const x = useMotionValue(0);
+  const dragControls = useDragControls();
+
   return (
-    <Slider {...settings}>
-      {slides.map((slide, index) => {
-        return (
-          <Card key={index} maxW="sm" className="relative">
-            <CardBody>
-              <Image
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-                borderRadius="lg"
-              />
-              <Box className="absolute top-4 right-4 p-2 rounded-lg bg-orange-600 text-white">
-                {slide.offer}% off
-              </Box>
-              <Stack mt="6" spacing="3">
-                <Heading size="md">Living room Sofa</Heading>
-                <Text>
-                  This sofa is perfect for modern tropical spaces, baroque
-                  inspired spaces, earthy toned spaces and for people who love a
-                  chic design with a sprinkle of vintage design.
-                </Text>
-                <Text color="blue.600" fontSize="2xl">
-                  $450
-                </Text>
-              </Stack>
-            </CardBody>
-            <Divider />
-            <CardFooter>
-              <ButtonGroup spacing="2">
-                <Button variant="solid" colorScheme="blue">
-                  Book now
-                </Button>
-              </ButtonGroup>
-            </CardFooter>
-          </Card>
-        );
-      })}
-    </Slider>
+    <motion.div
+      className="cursor-grab parent"
+      overflow="hidden"
+      transition={{ type: "spring", stiffness: 120 }}
+    >
+      <Flex wrap="wrap" justify="space-between" paddingBottom="2rem">
+        <Heading as="h3">Our Recommendations</Heading>
+        <ButtonGroup>
+          <Button
+            onClick={() => {
+              if (!isDragging) {
+                x.set(Math.min(x.get() + 500, 0));
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowAltCircleLeft} size="xl" />
+          </Button>
+          <Button
+            onClick={() => {
+              if (!isDragging) {
+                x.set(Math.max(x.get() - 500, -carouselWidth));
+              }
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowAltCircleRight} size="xl" />
+          </Button>
+        </ButtonGroup>
+      </Flex>
+      <motion.div
+        className={`flex gap-10 ${!isDragging ? "transition-all" : ""} `}
+        onDragStart={() => setIsDragging(true)}
+        onDragEnd={() => setIsDragging(false)}
+        drag="x"
+        dragControls={dragControls}
+        dragConstraints={{
+          right: 0,
+          left: -(
+            carouselWidth - document.querySelector(".parent")?.offsetWidth
+          ),
+        }}
+        dragElastic={0.5}
+        style={{ x }}
+      >
+        {slides.map((slide, index) => {
+          return (
+            <motion.div key={index}>
+              <Card
+                className="relative"
+                h="35rem"
+                w="25rem"
+                backgroundColor={theme.cardColor}
+              >
+                <CardBody>
+                  <Image
+                    loading="lazy"
+                    objectFit="cover"
+                    src={`src/assets/images/${slide.image}`}
+                    borderRadius="lg"
+                    pointerEvents={"none"}
+                  />
+                  <Box className="absolute top-4 right-4 p-2 rounded-lg bg-orange-600 text-white">
+                    {slide.offer}% off
+                  </Box>
+                  <Stack mt="6" spacing="3">
+                    <Heading size="md" as="h4">
+                      {slide.title}
+                    </Heading>
+                    <Text>{slide.description}</Text>
+                  </Stack>
+                </CardBody>
+                <Divider />
+                <CardFooter
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <ButtonGroup spacing="2">
+                    <Button variant="solid" colorScheme="blue">
+                      Book now
+                    </Button>
+                  </ButtonGroup>
+                  <Text
+                    fontSize="xl"
+                    backgroundColor={"white"}
+                    padding={"0.5rem"}
+                    borderRadius={"0.5rem"}
+                    color={"var(--blackish)"}
+                  >
+                    ${slide.price}
+                  </Text>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          );
+        })}
+      </motion.div>
+    </motion.div>
   );
 };
 

@@ -150,6 +150,7 @@ const SignUp = () => {
                     id="password"
                     name="password"
                     type="password"
+                    autoComplete="Mypassword2@"
                     placeholder="Your password"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     {...formik.getFieldProps("password")}
@@ -165,6 +166,7 @@ const SignUp = () => {
                   <Input
                     id="confirmPassword"
                     name="confirmPassword"
+                    autoComplete="Mypassword2@"
                     type="password"
                     placeholder="Confirm password"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

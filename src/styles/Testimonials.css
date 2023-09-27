@@ -1,0 +1,8 @@
+.fade-text{
+    animation: fadeIn;
+    animation-duration: 1s;
+}
+
+@keyframes fadeIn {
+    from{opacity: 0;}
+}

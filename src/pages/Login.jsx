@@ -50,7 +50,6 @@ const SignUp = () => {
   }, []);
   return (
     <Box
-      colorScheme="light"
       className="w-full h-screen flex"
       backgroundColor="white"
       color="white"
@@ -92,6 +91,7 @@ const SignUp = () => {
                   <Input
                     bg="white"
                     id="email"
+                    autoComplete="email"
                     name="email"
                     type="email"
                     placeholder="Your email"
@@ -106,6 +106,7 @@ const SignUp = () => {
                   <Input
                     id="password"
                     name="password"
+                    autoComplete="current-password"
                     type="password"
                     placeholder="Your password"
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

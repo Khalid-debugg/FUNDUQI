@@ -11,7 +11,9 @@
     --light-lemon: rgb(197, 251, 109);
     --blackish: rgb(17, 17, 17);
 }
-
+html{
+    scroll-behavior: smooth;
+}
 *, *::after,*::before{
     margin: 0;
     padding: 0;
